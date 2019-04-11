@@ -1,29 +1,29 @@
 # -*- coding: utf-8 -*-
 
+from baby_cry_detection.rpi_methods.majority_voter import MajorityVoter
+from baby_cry_detection.rpi_methods.feature_engineer import FeatureEngineer
+from baby_cry_detection.rpi_methods.baby_cry_predictor import BabyCryPredictor
+from baby_cry_detection.rpi_methods import Reader
 import argparse
 import os
 import pickle
 import sys
 import warnings
 
-egg_path = '{}/../../lib/baby_cry_detection-1.1-py2.7.egg'.format(os.path.dirname(os.path.abspath(__file__)))
+egg_path = '{}/../../lib/baby_cry_detection-1.1-py2.7.egg'.format(
+    os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(egg_path)
-
-from baby_cry_detection.rpi_methods import Reader
-from baby_cry_detection.rpi_methods.baby_cry_predictor import BabyCryPredictor
-from baby_cry_detection.rpi_methods.feature_engineer import FeatureEngineer
-from baby_cry_detection.rpi_methods.majority_voter import MajorityVoter
 
 
 def main():
 
     parser = argparse.ArgumentParser()
     parser.add_argument('--load_path_data',
-                        default='{}/../../../recording/'.format(os.path.dirname(os.path.abspath(__file__))))
+                        default='{}/../../recording/'.format(os.path.dirname(os.path.abspath(__file__))))
     parser.add_argument('--load_path_model',
-                        default='{}/../../../output/model/'.format(os.path.dirname(os.path.abspath(__file__))))
+                        default='{}/../../output/model/'.format(os.path.dirname(os.path.abspath(__file__))))
     parser.add_argument('--save_path',
-                        default='{}/../../../output/prediction/'.format(os.path.dirname(os.path.abspath(__file__))))
+                        default='{}/../../output/prediction/'.format(os.path.dirname(os.path.abspath(__file__))))
 
     # Arguments
     args = parser.parse_args()
@@ -65,10 +65,10 @@ def main():
 
     # https://stackoverflow.com/questions/41146759/check-sklearn-version-before-loading-model-using-joblib
     with warnings.catch_warnings():
-      warnings.simplefilter("ignore", category=UserWarning)
+        warnings.simplefilter("ignore", category=UserWarning)
 
-      with open((os.path.join(load_path_model, 'model.pkl')), 'rb') as fp:
-          model = pickle.load(fp)
+        with open((os.path.join(load_path_model, 'model.pkl')), 'rb') as fp:
+            model = pickle.load(fp)
 
     predictor = BabyCryPredictor(model)
 
@@ -92,6 +92,7 @@ def main():
     # Save prediction result
     with open(os.path.join(save_path, 'prediction.txt'), 'wb') as text_file:
         text_file.write("{0}".format(majority_vote))
+
 
 if __name__ == '__main__':
     main()
