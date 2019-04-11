@@ -23,9 +23,9 @@ def main():
     parser.add_argument('--load_path_data',
                         default='{}/../recording/'.format(os.path.dirname(os.path.abspath(__file__))))
     parser.add_argument('--load_path_model',
-                        default='{}/../output/model/'.format(os.path.dirname(os.path.abspath(__file__))))
+                        default='{}/../model/'.format(os.path.dirname(os.path.abspath(__file__))))
     parser.add_argument('--save_path',
-                        default='{}/../output/prediction/'.format(os.path.dirname(os.path.abspath(__file__))))
+                        default='{}/../prediction/'.format(os.path.dirname(os.path.abspath(__file__))))
 
     # Arguments
     args = parser.parse_args()
