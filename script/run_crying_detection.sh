@@ -23,7 +23,7 @@ function predict() {
 	echo "Predicting . . . . ."
 	python /opt/baby_cry_rpi/script/make_prediction.py
 	PREDICTION=$(cat /opt/baby_cry_rpi/prediction/prediction.txt)
-	# echo "Prediction is $PREDICTION"
+	echo "Prediction is $PREDICTION"
 }
 
 function start_playing() {
